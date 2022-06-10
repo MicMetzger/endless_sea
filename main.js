@@ -195,7 +195,7 @@ window.addEventListener("resize", () => {
 	sizes.height = window.innerHeight;
 
 	// Update camera
-	camera.aspect = sizes.width + 50 / sizes.height + 50;
+	camera.aspect = sizes.width / sizes.height;
 	camera.updateProjectionMatrix();
 
 	// Update renderer
@@ -208,12 +208,12 @@ window.addEventListener("resize", () => {
 //################################### Camera ###################################//
 // Base camera
 const camera = new THREE.PerspectiveCamera(
-	35,
+	45,
 	sizes.width / sizes.height,
-	0.1,
+	0.002,
 	115
 );
-camera.position.set(1, 0.8, 1);
+camera.position.set(1, 1, 1);
 scene.add(camera);
 
 
@@ -221,9 +221,11 @@ scene.add(camera);
 //################################### Controls ###################################//
 const controls         = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
-controls.minDistance   = 0.8;
-controls.maxDistance   = 2;
-
+controls.minDistance   = 1.00;
+// controls.minDistance   = 0.02;
+controls.maxDistance   = 3;
+// Orbit boundary: Ocean surface
+controls.maxPolarAngle = Math.PI/2;
 
 
 //################################### Renderer ###################################//
@@ -240,8 +242,8 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 //################################### Animate ###################################//
 const clock = new THREE.Clock();
 const tick  = () => {
-	water.position.z = camera.position.z;
-	water.position.x = camera.position.x;
+	water.position.z = camera.position.z - 1.6;
+	water.position.x = camera.position.x - 1.6;
 
 	waterMaterial.uniforms.uTime.value = clock.getElapsedTime();
 	// Update
