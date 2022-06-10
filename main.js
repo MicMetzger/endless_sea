@@ -183,7 +183,7 @@ scene.add(water);
 
 
 
-//################################### Sizes ###################################//
+//################################### Event Update ###################################//
 const sizes = {
 	width : window.innerWidth,
 	height: window.innerHeight
@@ -199,7 +199,7 @@ window.addEventListener("resize", () => {
 	camera.updateProjectionMatrix();
 
 	// Update renderer
-	renderer.setSize(sizes.width + 150, sizes.height + 150);
+	renderer.setSize(sizes.width, sizes.height);
 	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
 
@@ -221,7 +221,7 @@ scene.add(camera);
 //################################### Controls ###################################//
 const controls         = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
-controls.minDistance   = 1.00;
+controls.minDistance   = 0.95;
 // controls.minDistance   = 0.02;
 controls.maxDistance   = 3;
 // Orbit boundary: Ocean surface
