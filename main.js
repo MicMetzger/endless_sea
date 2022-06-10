@@ -244,6 +244,9 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 //################################### Animate ###################################//
 const clock = new THREE.Clock();
 const tick  = () => {
+	water.position.z = camera.position.z;
+	water.position.x = camera.position.x;
+
 	waterMaterial.uniforms.uTime.value = clock.getElapsedTime();
 	// Update
 	controls.update();
