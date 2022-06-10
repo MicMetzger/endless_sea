@@ -19,15 +19,10 @@ const scene = new THREE.Scene();
 const fog = new THREE.Fog("#000000", 0.15, 3.5);
 scene.fog = fog;
 
-// gui.add(fog, "near").min(0).max(10).step(0.001);
-// gui.add(fog, "far").min(0).max(10).step(0.001);
-// gui.add(light)
-
-
 
 //################################### Water ###################################//
 //  Geometry //
-const waterGeometry = new THREE.PlaneGeometry(8, 8, 512, 512);
+const waterGeometry = new THREE.PlaneGeometry(10, 10, 510, 510);
 
 const waterVertexShader = `
 uniform float uTime;
@@ -170,7 +165,8 @@ const waterMaterial = new THREE.ShaderMaterial({
 	uniforms      : {
 		uTime        : {value: 0},
 		uDepthColor  : {value: new THREE.Color("#03325e")},
-		uSurfaceColor: {value: new THREE.Color("#497de4")},
+		uSurfaceColor: {value: new THREE.Color("#325bb9")},
+		// uSurfaceColor: {value: new THREE.Color("#497de4")},
 		fogColor     : {type: "c", value: scene.fog.color},
 		fogNear      : {type: "f", value: scene.fog.near},
 		fogFar       : {type: "f", value: scene.fog.far}
@@ -199,11 +195,11 @@ window.addEventListener("resize", () => {
 	sizes.height = window.innerHeight;
 
 	// Update camera
-	camera.aspect = sizes.width / sizes.height;
+	camera.aspect = sizes.width + 50 / sizes.height + 50;
 	camera.updateProjectionMatrix();
 
 	// Update renderer
-	renderer.setSize(sizes.width, sizes.height);
+	renderer.setSize(sizes.width + 150, sizes.height + 150);
 	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
 
@@ -212,12 +208,12 @@ window.addEventListener("resize", () => {
 //################################### Camera ###################################//
 // Base camera
 const camera = new THREE.PerspectiveCamera(
-	40,
+	35,
 	sizes.width / sizes.height,
 	0.1,
-	100
+	115
 );
-camera.position.set(0, 0.4, 1);
+camera.position.set(1, 0.8, 1);
 scene.add(camera);
 
 
