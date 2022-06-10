@@ -4,9 +4,10 @@ import {OrbitControls} from "//unpkg.com/three@0.123.0/examples/jsm/controls/Orb
 
 
 
+// https://github.com/MicMetz/endless_sea
 
 //################################### Base ###################################//
-// const gui = new dat.GUI({width: 350});
+// const gui = new dat.GUI({width: });
 // Canvas
 const canvas = document.querySelector("canvas.canvas");
 // Scene
