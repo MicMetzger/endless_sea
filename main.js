@@ -7,7 +7,6 @@ import {OrbitControls} from "//unpkg.com/three@0.123.0/examples/jsm/controls/Orb
 // https://github.com/MicMetz/endless_sea
 
 //################################### Base ###################################//
-// const gui = new dat.GUI({width: });
 // Canvas
 const canvas = document.querySelector("canvas.canvas");
 // Scene
@@ -20,9 +19,10 @@ const fog = new THREE.Fog("#000000", 0.15, 3.5);
 scene.fog = fog;
 
 
+
 //################################### Water ###################################//
 //  Geometry //
-const waterGeometry = new THREE.PlaneGeometry(10, 10, 510, 510);
+const waterGeometry = new THREE.PlaneGeometry(10, 10, 300, 300);
 
 const waterVertexShader = `
 uniform float uTime;
@@ -164,9 +164,9 @@ const waterMaterial = new THREE.ShaderMaterial({
 	fragmentShader: waterFragmentShader,
 	uniforms      : {
 		uTime        : {value: 0},
-		uDepthColor  : {value: new THREE.Color("#03325e")},
-		uSurfaceColor: {value: new THREE.Color("#325bb9")},
-		// uSurfaceColor: {value: new THREE.Color("#497de4")},
+		uDepthColor  : {value: new THREE.Color("#0f5293")},
+		// uSurfaceColor: {value: new THREE.Color("#2d57bb")},
+		uSurfaceColor: {value: new THREE.Color("#497de4")},
 		fogColor     : {type: "c", value: scene.fog.color},
 		fogNear      : {type: "f", value: scene.fog.near},
 		fogFar       : {type: "f", value: scene.fog.far}
@@ -199,7 +199,7 @@ window.addEventListener("resize", () => {
 	camera.updateProjectionMatrix();
 
 	// Update renderer
-	renderer.setSize(sizes.width, sizes.height);
+	renderer.setSize(sizes.width + 50, sizes.height + 50);
 	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
 
@@ -229,10 +229,7 @@ controls.maxPolarAngle = Math.PI/2;
 
 
 //################################### Renderer ###################################//
-const renderer = new THREE.WebGLRenderer({
-	canvas   : canvas,
-	antialias: true
-});
+const renderer = new THREE.WebGLRenderer({ canvas   : canvas, antialias: true });
 renderer.setSize(sizes.width + 50, sizes.height + 50);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
@@ -242,8 +239,8 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 //################################### Animate ###################################//
 const clock = new THREE.Clock();
 const tick  = () => {
-	water.position.z = camera.position.z - 1.6;
-	water.position.x = camera.position.x - 1.6;
+	water.position.z = camera.position.z - 2;
+	water.position.x = camera.position.x - 2;
 
 	waterMaterial.uniforms.uTime.value = clock.getElapsedTime();
 	// Update
